@@ -28,6 +28,6 @@ while cd != '/':
 p1 = sum(dirs[d] for d in dirs if dirs[d] <= 100_000)
 print(f"Part 1: {p1}")
 
-need = 300_000_00 - (70_000_000 - dirs['/'])
+need = 30_000_000 - (70_000_000 - dirs['/'])
 candidate = min([ (dirs[d],d) for d in dirs if dirs[d] >= need ])
 print(f"Part 2: {candidate[0]}")
