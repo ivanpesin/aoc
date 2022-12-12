@@ -35,12 +35,13 @@ for i in range(len(monkeys)):
 
 rounds = 20 if part == 1 else 10_000
 for r in range(rounds):
+    print(f"Round {r}")
     for i,m in enumerate(monkeys):
         while m.items:
             m.inspections += 1
             item = m.items.popleft()
             if part == 1: item = m.worryfunc(item) // 3
-            else        : item = m.worryfunc(item) % maxdiv
+            else        : item = m.worryfunc(item) #% maxdiv
             nm = m.next[item % m.mod == 0]
             monkeys[nm].items.append(item)
 
