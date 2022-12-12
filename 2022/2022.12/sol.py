@@ -19,7 +19,7 @@ with open(sys.argv[1]) as f:
 
 queue, seen, distto = collections.deque(), set(), {}
 
-for p in [ pos ] if part == 2 else [ p for p in grid if grid[p] == "a" ]:
+for p in [ pos ] if part == 1 else [ p for p in grid if grid[p] == "a" ]:
     queue.append(p)
     seen.add(p)
     distto[p] = 0
