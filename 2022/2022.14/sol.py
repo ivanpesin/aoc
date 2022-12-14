@@ -35,7 +35,7 @@ while not done:
         else:
             atrest = True
             grid[x,y] = 'o'
-        if ((part == 1 and y > hi[1]) or (part == 2 and grid[500,0] == 'o')):
+        if ((part == 1 and y > hi[1]) or (part == 2 and grid[tuple(frm)] == 'o')):
             done = True
             break
 
