@@ -19,8 +19,6 @@ for l in data:
             for i in range(b,y+sign(y-b),sign(y-b)): grid[x,i] = '#'
         else:
             for i in range(a,x+sign(x-a),sign(x-a)): grid[i,y] = '#'
-        if not lo: lo = [a,b]
-        if not hi: hi = [x,y]
         lo = [ min([a,x,lo[0]]), min([b,y,lo[1]]) ]
         hi = [ max([a,x,hi[0]]), max([b,y,hi[1]]) ]
 
