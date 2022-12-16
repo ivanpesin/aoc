@@ -17,14 +17,14 @@ def maxflow(v, opened, time, part):
         else: return maxflow("AA", opened, 26, 1)
     best = 0
 
-    for w in adj[v]:
-        best = max(best, maxflow(w, opened, time - 1, part))
-
-    if v not in opened:
-        flow = rate[v] * (time - 1)
+    flow = rate[v] * (time - 1)
+    if v not in opened and flow > 0:
         open_more = opened | set([v])
         for w in adj[v]:
-            if flow != 0: best = max(best, flow + maxflow(w, open_more, time - 2, part))
+            best = max(best, flow + maxflow(w, open_more, time - 2, part))
+
+    for w in adj[v]: 
+        best = max(best, maxflow(w, opened, time - 1, part))
 
     return best
 
