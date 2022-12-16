@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, functools, collections, pprint
+import sys, functools
 
 adj, rate = {}, {}
 with open(sys.argv[1]) as f:
