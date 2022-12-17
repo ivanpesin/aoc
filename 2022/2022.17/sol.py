@@ -25,10 +25,9 @@ def can_move(shi,dx,dy):
 def fall(nshape, part):
     global tick, keep_until
 
-    if chamber: 
-        h = max(k[1] for k in chamber) + 1
-        x, y = SDX, SDY + h
-    else: h, x, y = -1, SDX, SDY
+    h = 0
+    if chamber: h = max(k[1] for k in chamber) + 1
+    x, y = SDX, SDY + h
     ishape, atrest = nshape % len(shapes), False
 
     if part == 2:
@@ -48,7 +47,6 @@ def fall(nshape, part):
             print(f'  remaining blocks: {brem}')
             print(f'Part 2: {height[cstart] + (cheight * cfit) + (height[cstart+brem]-height[cstart])}')
             return           
-
         state.append(shash); height.append(h)
 
     while not atrest:
