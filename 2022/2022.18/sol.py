@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-from itertools import product
 
 grid = {}
 with open(sys.argv[1]) as f:
