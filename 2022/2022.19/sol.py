@@ -5,30 +5,35 @@ import sys, re, collections, functools, multiprocessing
 with open(sys.argv[1]) as f:
     blueprints = [ list(map(int,re.findall(r'\d+',s))) for s in f ]
 
+def prune(bp, state):
+    res = state[:]
+    ore_max = max(bp[i] for i in (1,2,3,5))
+    if res[5] > ore_max: res[5]=ore_max
+    if res[6] > bp[4]:   res[6]=bp[4]
+    if res[7] > bp[6]:   res[7]=bp[6]
+
+    if res[1] >= res[-1]*ore_max-res[5]*(res[-1]-1):
+        res[1] = res[-1]*ore_max-res[5]*(res[-1]-1)
+    if res[2] >= res[-1]*bp[4]-res[6]*(res[-1]-1):
+        res[2] = res[-1]*bp[4]-res[6]*(res[-1]-1)
+    if res[3] >= res[-1]*bp[6]-res[7]*(res[-1]-1):
+        res[3] = res[-1]*bp[6]-res[7]*(res[-1]-1)
+    return res
+
 def bfs(bp, timer):
     #            blueprint costs
     # bp:    nr, ore, clay, ore, clay, ore, geo
     # state: nr, ore, clay, obs, geo,  ore, clay, obs, geo, timer
     #           |resource counts      |robot counts        |
     best, state = 0, (-1, 0,0,0,0, 1,0,0,0, timer)
-    ore_max = max(bp[i] for i in (1,2,3,5))
     todo = collections.deque([state])
     seen = { state }
     while todo:
         state = list(todo.popleft())
         best = max(best,state[4])
         if state[-1] == 0: continue
-
-        if state[5] > ore_max: state[5]=ore_max
-        if state[6] > bp[4]: state[6]=bp[4]
-        if state[7] > bp[6]: state[7]=bp[6]
-
-        if state[1] >= state[-1]*ore_max-state[5]*(state[-1]-1):
-            state[1] = state[-1]*ore_max-state[5]*(state[-1]-1)
-        if state[2] >= state[-1]*bp[4]-state[6]*(state[-1]-1):
-            state[2] = state[-1]*bp[4]-state[6]*(state[-1]-1)
-        if state[3] >= state[-1]*bp[6]-state[7]*(state[-1]-1):
-            state[3] = state[-1]*bp[6]-state[7]*(state[-1]-1)
+        
+        state = prune(bp, state)
 
         nstates = []
         nstates.append(tuple([-1, *(sum(p) for p in zip(state[1:5], state[5:9])), *state[5:9], state[-1] - 1]))
