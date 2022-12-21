@@ -22,7 +22,7 @@ def prune(bp, state):
 
 def bfs(bp, timer):
     #            blueprint costs
-    # bp:    nr, ore, clay, ore, clay, ore, geo
+    # bp:    nr, ore, clay, ore, clay, ore, obs
     # state: nr, ore, clay, obs, geo,  ore, clay, obs, geo, timer
     #           |resource counts      |robot counts        |
     best, state = 0, (-1, 0,0,0,0, 1,0,0,0, timer)
@@ -32,7 +32,7 @@ def bfs(bp, timer):
         state = list(todo.popleft())
         best = max(best,state[4])
         if state[-1] == 0: continue
-        
+
         state = prune(bp, state)
 
         nstates = []
