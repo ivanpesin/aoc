@@ -15,7 +15,7 @@ print("Part 1:", monkey(sys.argv[2]))
 start, op, target = data['root'].split()
 if len(sys.argv) > 3:
     data['humn'] = sys.argv[3]
-    print(f"a={monkey(start)} b={monkey(target)}")
+    print(f"a={monkey(start)}\nb={monkey(target)}")
 else:
     def bsearch(v,lo,hi):
         if hi < lo: return -1
