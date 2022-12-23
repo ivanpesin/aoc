@@ -35,12 +35,10 @@ for round in range(int(sys.argv[2])):
                 else:               plan[nr,nc] = elf
                 break
 
-    moved = set()    # Execute the plan
-    for p in plan:
+    for p in plan: # Execute the plan
         if plan[p] is not None:
             elves.discard(plan[p])
-            moved.add(p)
-    elves = moved | elves
+            elves.add(p)
 
     if elves == before:
         print("Part 2:",round+1)
