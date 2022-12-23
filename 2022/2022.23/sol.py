@@ -10,53 +10,44 @@ N, S, W, E = (-1,0), (1,0), (0,-1), (0,1)
 ORDER = [ N, S, W, E ]
 
 for round in range(int(sys.argv[2])):
-    # print("Round:",round,"Elves:", elves)
-    prev = elves
-    plan = {}
+    before, plan = elves.copy(), {}
     for elf in elves:
         r,c = elf
 
-        for a,b in product((-1,0,1),(-1,0,1)):
+        for a,b in product((-1,0,1),(-1,0,1)):  # do not move if no neighbours
             if a == b == 0: continue
             if (r+a,c+b) in elves: break
         else:
             continue
 
-
         for o in range(len(ORDER)):
-            head, done = ORDER[(o+round)%len(ORDER)], True
+            head, selected = ORDER[(o+round)%len(ORDER)], False
             for i in range(-1,2):
                 if head[0] != 0: cpos = (r+head[0],c+i)
                 else:            cpos = (r+i,c+head[1])
-                if cpos in elves:
-                    done = False
-                    break
-            if done:
-                if (r+head[0],c+head[1]) in plan:
-                    # print("    collision:",elf,"to",(r+head[0],c+head[1]))
-                    del plan[(r+head[0],c+head[1])]
-                else:
-                    # print("   ",elf,"to",(r+head[0],c+head[1]))
-                    plan[(r+head[0],c+head[1])] = elf
+                if cpos in elves: break
+            else:
+                selected = True
+
+            if selected:
+                nr,nc = r+head[0],c+head[1]
+                if (nr,nc) in plan: plan[nr,nc] = None
+                else:               plan[nr,nc] = elf
                 break
 
-    # print("  Plan:",plan)
-
-    moved = set()
+    moved = set()    # Execute the plan
     for p in plan:
-        elves.discard(plan[p])
-        moved.add(p)
+        if plan[p] is not None:
+            elves.discard(plan[p])
+            moved.add(p)
     elves = moved | elves
 
-    if elves == prev:
+    if elves == before:
         print("Part 2:",round+1)
         break
     
-
 frm = min(c[0] for c in elves), min(c[1] for c in elves)
 to  = max(c[0] for c in elves), max(c[1] for c in elves)
 
-# print("  Final:",elves)
 res = '\n'.join([ ''.join([ '#' if (r,c) in elves else '.' for c in range(frm[1],to[1]+1) ]) for r in range(frm[0],to[0]+1) ])
-# print(res)
-print(res.count('.'))
+print("Part 1:", res.count('.'))
