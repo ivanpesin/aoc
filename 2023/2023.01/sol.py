@@ -2,7 +2,6 @@
 
 import sys
 
-
 data = [ s.strip() for s in open(sys.argv[1]).readlines() ]
 
 # Part 1
