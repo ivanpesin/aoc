@@ -8,15 +8,25 @@ data = [ s.strip() for s in open(sys.argv[1]).readlines() ]
 def part1():
     res = []
     for i, s in enumerate(data):
+        print(s, end=' ')
         for m in re.finditer(r'\d+', s):
             start, end, adj = m.start(), m.end(), []
-
-            if start > 0:       adj.append(s[start := start-1])
-            if end < len(s):    adj.append(s[(end := end+1)-1])
-            if i > 0:           adj.extend(data[i-1][start:end])
+            print(f"{m.group()}@({start},{end})", end=' ')
+            if start > 0:
+                start -= 1
+                adj.append(s[start])
+            if end < len(s):
+                end += 1
+                adj.append(s[end-1])
+            if i > 0: adj.extend(data[i-1][start:end])
             if i < len(data)-1: adj.extend(data[i+1][start:end])
 
-            if [ c for c in adj if not (c.isdigit() or c=='.') ]: res.append(int(m.group()))
+            print(f"adj={adj}", end=' ')
+            adj = [ c for c in adj if not (c.isdigit() or c=='.') ]
+            if adj:
+                print("Y", end=' ')
+                res.append(int(m.group()))
+        print()
 
     return sum(res)
 
