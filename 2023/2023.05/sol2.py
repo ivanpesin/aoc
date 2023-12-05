@@ -14,9 +14,8 @@ for s in open(sys.argv[1]).read().split('\n\n'):
 
 def solve(idx, seeds):
     res, timer = None, datetime.datetime.now()
-    for i, seed in enumerate(seeds):
+    for i, dst in enumerate(seeds):
         if i % 10_000_000 == 0: print(f"{idx}: {i=} {datetime.datetime.now() - timer}")
-        dst = seed
         for t in maps:
             for m in maps[t]:
                 if m[1] <= dst < m[1] + m[2]:
@@ -34,7 +33,7 @@ if __name__ == '__main__':
     for n,r in list(zip(seeds,seeds[1:]))[::2]:
         for a in range (0, r, 100_000_000):
             rseeds.append(range(n+a, n+a+min(100_000_000, r-a)))
-    print(rseeds)
+
     with multiprocessing.Pool() as p:
         res = p.starmap(solve, zip(range(len(rseeds)), rseeds))
 
