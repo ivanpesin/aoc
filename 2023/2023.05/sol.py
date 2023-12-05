@@ -25,10 +25,7 @@ for seed in seeds:
 
 print("Part 1:", min(res))
 
-
-res,rseeds = [], []
-for n,r in list(zip(seeds,seeds[1:]))[::2]:
-    rseeds.append(tuple([n,n+r-1]))
+res, rseeds = [], [ (n,n+r-1) for n,r in list(zip(seeds,seeds[1:]))[::2] ]
 
 while rseeds:
     current, next = [], [ rseeds.pop(0) ]
@@ -38,9 +35,8 @@ while rseeds:
             start, end = current.pop(0)
             matched = False
             for m in maps[t]:
-                delta = m[0] - m[1]
-                a,b = m[1], m[1] + m[2] - 1
-                if min(end,b) - max(start,a) >= 0:
+                a,b, delta = m[1], m[1] + m[2] - 1, m[0] - m[1]
+                if min(end,b) - max(start,a) >= 0:  # overlap
                     points = sorted([start,end,a,b])
                     if start < a: current.append(tuple([points[0], points[1]-1]))
                     if end > b:   current.append(tuple([points[2]+1, points[3]]))
