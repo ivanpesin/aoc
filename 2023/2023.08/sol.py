@@ -18,22 +18,16 @@ def part1():
     return None
 
 def part2():
-    cnt, start, clen = 0, [ n for n in nodes if n.endswith('A') ], []
+    start, clen = [ n for n in nodes if n.endswith('A') ], []
     print(f"Start nodes: {start}")
     for st in start:
-        seen = [(st,0)]
+        cnt = 0
         for step in itertools.cycle(instr):
             n = nodes[st][0] if step == 'L' else nodes[st][1]
             cnt += 1
-
-            instr_pos = cnt % len(instr)
-            step_id = (n,instr_pos)
-            if step_id in seen:
-                pos = seen.index(step_id)
-                print(f"Step {cnt}: {step_id}, cycle start pos {pos}, cycle len {len(seen) - pos}")
-                clen.append(len(seen) - pos)
+            if n.endswith('Z'):
+                clen.append(cnt)
                 break
-            seen.append(step_id)
             st = n
 
     return math.lcm(*clen) if clen else None
