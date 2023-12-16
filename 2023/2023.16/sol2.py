@@ -5,7 +5,6 @@ import sys
 data = { complex(c,r): ch for r,s in enumerate(open(sys.argv[1]).readlines())
                           for c,ch in enumerate(s.strip()) }
 rows, cols = max(int(c.imag) for c in data)+1, max(int(c.real) for c in data)+1
-inside = lambda pos: pos.imag in range(rows) and pos.real in range(cols)
 
 def energy(todo):
     done = set()
