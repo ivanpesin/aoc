@@ -7,16 +7,6 @@ data = { complex(c,r): ch for r,s in enumerate(open(sys.argv[1]).readlines())
 rows, cols = max(int(c.imag) for c in data)+1, max(int(c.real) for c in data)+1
 inside = lambda pos: pos.imag in range(rows) and pos.real in range(cols)
 
-def show(traces=False):
-    for r in range(rows):
-        for c in range(cols):
-            if traces:
-                if complex(c,r) in energized: print('#', end='')
-                else: print(data[complex(c,r)], end='')
-            else:
-                print(data[complex(c,r)], end='')
-        print()
-
 def walk(data, stack, visited):
     while stack:
         pos, dir = stack.pop()
