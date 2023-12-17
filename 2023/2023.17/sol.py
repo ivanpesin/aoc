@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, pprint, heapq, collections
+import sys, pprint, heapq
 
 data = { (r,c): int(ch) for r,s in enumerate(open(sys.argv[1]).readlines())
                         for c,ch in enumerate(s.strip()) }
