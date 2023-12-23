@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, graphlib, pprint
-from functools import cache
-
-sys.setrecursionlimit(100000)
+import sys, pprint
 
 data = { complex(c,r): ch for r, s in enumerate(open(sys.argv[1])) for c, ch in enumerate(s.strip()) }
 rows, cols = max(c.imag for c in data)+1, max(c.real for c in data)+1
