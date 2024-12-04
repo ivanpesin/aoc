@@ -1,6 +1,6 @@
 import sys, pprint, re
 
-data = open(sys.argv[1]).read()
+data = open(sys.argv[1]).read().replace("\n", "")
 
 def solve(part2):
     do, res = True, 0
