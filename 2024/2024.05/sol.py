@@ -30,10 +30,7 @@ def reorder(a):
 res = res2 = 0
 for u in update_str.split('\n'):
     update, correct = u.split(','), True
-    for i in range(len(update)):
-        if not is_correct(update):
-            correct = False
-            break
+    if not is_correct(update): correct = False
     if correct: res  += int(update[len(update)//2])
     else:       res2 += int(reorder(update)[len(update)//2])
 
