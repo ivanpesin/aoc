@@ -1,8 +1,8 @@
 import sys, pprint, collections
 
 rule_str, update_str = open(sys.argv[1]).read().split('\n\n')
-rules, update = {}, []
 
+rules = {}
 for r in rule_str.split('\n'):
     for left, right in [r.split('|')]:
         if right in rules: rules[right].append(left)
