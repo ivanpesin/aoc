@@ -1,4 +1,4 @@
-import sys, pprint, collections
+import sys, pprint
 
 rule_str, update_str = open(sys.argv[1]).read().split('\n\n')
 
