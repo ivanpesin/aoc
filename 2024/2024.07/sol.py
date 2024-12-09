@@ -2,7 +2,7 @@ import sys, pprint
 import itertools
 
 data = []
-for s in open(sys.argv[1]).readlines():
+for s in open(sys.argv[1]):
     left, right = s.strip().split(': ')
     right = right.split()
     data.append((int(left), [int(x) for x in right]))
