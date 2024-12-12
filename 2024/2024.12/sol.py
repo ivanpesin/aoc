@@ -35,10 +35,5 @@ def corners(plot):
             if a + d1 in plot and a + d2 in plot and a + d1 + d2 not in plot: res += 1
     return res
 
-res1 = res2 = 0
-for p in plots:
-    res1 += len(p) * perimeter(p)
-    res2 += len(p) * corners(p)
-
-print("Part 1:", res1)
-print("Part 2:", res2)
+print("Part 1:", sum(len(p) * perimeter(p) for p in plots))
+print("Part 2:", sum(len(p) * corners(p) for p in plots))
