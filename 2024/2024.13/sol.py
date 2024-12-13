@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, re, pprint, collections
+import sys, re, pprint
 from sympy import solve, symbols
 
 machines = []
