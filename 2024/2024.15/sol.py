@@ -36,7 +36,7 @@ def execute(part2):
                 while pos != robot_pos:
                     grid[pos], pos = grid[pos-dir], pos-dir
                 grid[pos] = '.'
-                robot_pos = pos = robot_pos + dir
+                robot_pos += dir
         else:
             blocked, shape = bfs(robot_pos, dir)
             if blocked: continue
