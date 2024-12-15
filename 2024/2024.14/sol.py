@@ -4,8 +4,8 @@ import sys, pprint, re, math, time, collections
 
 robots = []
 for s in open(sys.argv[1]):
-    x,y, dx,dy = re.findall(r'(-?\d+)', s)
-    robots.append((int(x)+int(y)*1j, int(dx)+int(dy)*1j))
+    x,y, dx,dy = [int(a) for a in re.findall(r'(-?\d+)', s) ]
+    robots.append((complex(x, y), complex(dx, dy)))
 
 W, H = 11, 7
 W, H = 101, 103
