@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, pprint, re, math, time, collections
+import sys
 
 data = open(sys.argv[1]).read()
 grid = { complex(x, y): c for y, row in enumerate(data.split('\n\n')[0].split('\n'))
@@ -61,5 +61,5 @@ def grid_p2():
 for part in range(2):
     if part == 1: grid = grid_p2()
     execute(part)
-    res = int(sum(abs(b.real) + 100*abs(b.imag) for b in grid if grid[b] in '[O'))
+    res = int(sum(b.real + 100*b.imag for b in grid if grid[b] in '[O'))
     print(f"Part {part+1}: {res}")
