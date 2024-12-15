@@ -58,8 +58,8 @@ def grid_p2():
 
     return grid
 
-for part in range(2):
-    if part == 1: grid = grid_p2()
-    execute(part)
+for part2 in range(2):
+    if part2: grid = grid_p2()
+    execute(part2)
     res = int(sum(b.real + 100*b.imag for b in grid if grid[b] in '[O'))
-    print(f"Part {part+1}: {res}")
+    print(f"Part {part2+1}: {res}")
