@@ -8,25 +8,12 @@ grid = { complex(x, y): c for y, line in enumerate(open(sys.argv[1]))
 
 start, = [a for a in grid if grid[a] == 'S']
 end,   = [a for a in grid if grid[a] == 'E']
-SZ = int(max([ a.real for a in grid ]))
-
-def draw(cost):
-    print("\033[2J\033[H", end='', flush=True)
-    for y in range(SZ+1):
-        for x in range(SZ+1):
-            p = complex(x, y)
-            print('x' if p in cost else grid[p], end='')
-        print()
 
 def dijkstra(start, dir=1):
     queue = [(0, 0, start, dir)]
     cost, cnt = {start: 0}, collections.defaultdict(int)
     while queue:
         _, _, pos, dir = heapq.heappop(queue)
-
-        # draw(cost)
-        # print(cost[pos], pos)
-        # time.sleep(0.1)
 
         for d in (1, -1j, -1, 1j):
             npos = pos + d
