@@ -31,6 +31,8 @@ def run(reg):
         ptr += 2
     return out
 
+print("Part 1:", ','.join(map(str,run(reg))))
+
 # disassembly version
 # def run(a,b=0,c=0):
 #     res = []
@@ -43,8 +45,6 @@ def run(reg):
 #         b = b ^ c
 #         res.append(b % 8)
 #     return res
-
-print("Part 1:", ','.join(map(str,run(reg))))
 
 res, l = 0, len(code)-1
 for i in range(l-2,-1,-1):
