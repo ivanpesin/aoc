@@ -1,5 +1,4 @@
-import sys, re, copy
-import pprint
+import sys, re
 
 state, program = open(sys.argv[1]).read().split('\n\n')
 
@@ -15,7 +14,6 @@ def run(reg):
     ptr, out = 0, []
     while ptr < len(code):
         op, operand = code[ptr], code[ptr+1]
-        # print(f"ptr: {ptr} op: {op}, operand: {operand}")
         match op:
             case 0: reg['A'] = reg['A'] // 2**combo(reg, operand)
             case 1: reg['B'] ^= operand
