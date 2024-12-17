@@ -31,6 +31,18 @@ def run(reg):
         ptr += 2
     return out
 
+# disassembly version
+# def run(a,b=0,c=0):
+#     res = []
+#     while a != 0:
+#         b = a % 8
+#         b = b ^ 1
+#         c = a // 2**b
+#         b = b ^ 5
+#         a = a // 8
+#         b = b ^ c
+#         res.append(b % 8)
+#     return res
 
 print("Part 1:", ','.join(map(str,run(reg))))
 
