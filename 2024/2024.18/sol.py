@@ -30,7 +30,6 @@ for n,s in enumerate(open(sys.argv[1]).readlines()[cutoff:]):
     x, y = [ int(a) for a in s.strip().split(',') ]
     grid[complex(x, y)] = '#'
 
-    r = bfs(0, complex(maxx, maxy))
-    if r is None:
+    if bfs(0, complex(maxx, maxy)) is None:
         print(f"Part 2: {n+cutoff+1} @ {x},{y}")
         break
