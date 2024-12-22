@@ -1,4 +1,4 @@
-import sys, pprint, collections, itertools, functools
+import sys, pprint, collections, functools
 
 data = '789\n456\n123\n 0A'
 codepad = {complex(x, y): c for y, line in enumerate(data.split('\n'))
