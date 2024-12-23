@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, pprint, collections, tqdm
+import sys, pprint, collections
 
 grid = { complex(x, y): c for y, line in enumerate(open(sys.argv[1]))
                           for x, c in enumerate(line.strip()) }
@@ -25,7 +25,7 @@ dist = lambda a,b: abs(a.real - b.real) + abs(a.imag - b.imag)
 
 def shortcut(steps):
     res = collections.defaultdict(int)
-    for pos in tqdm.tqdm(cost):
+    for pos in cost:
         for d in [ complex(x,y) for x in range(-steps,steps+1)
                                 for y in range(-steps,steps+1)
                                    if 0 < dist(pos,pos+complex(x,y)) <= steps ]:
