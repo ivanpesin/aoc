@@ -12,7 +12,7 @@ p1 = p2 = 0
 for turn, dist in data:
     print(f'Dial is rotated {turn}{dist}')
     if turn == 'L': delta = (ptr - int(dist))
-    else: delta = (ptr + int(dist))
+    else:           delta = (ptr + int(dist))
 
     print(f'   dial crosses `0` {abs(delta // dial)} times')
     p2 += abs(delta // dial)
