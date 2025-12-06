@@ -17,8 +17,8 @@ max_x, max_y = max(x for x,_ in data), max(y for _,y in data)
 digits, nums, o, res = [], [], None, 0
 for x in range(max_x, -1, -1):
     for y in range(max_y+1):
-        if data.get((x,y), '').isdigit(): digits.append(data[x,y])
-        elif data.get((x,y), '') in '+*': o = op[data[x,y]]
+        if data.get((x,y),' ').isdigit(): digits.append(data[x,y])
+        elif data.get((x,y),' ') in '+*': o = op[data[x,y]]
     if not digits: continue
     nums.append(int(''.join(digits))); digits = []
     if o is not None:
