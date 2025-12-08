@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 import sys, math, collections as coll
-from itertools import combinations, groupby
+from itertools import combinations
 
 jboxes = [ tuple(map(int, s.split(','))) for s in open(sys.argv[1]).readlines() ]
 
-dist = { tuple(sorted((a,b))): math.dist(a,b) for a, b in combinations(jboxes, 2) }
-uf = { v: i for i, v in enumerate(jboxes) }
+dist = { (a,b) for a, b in combinations(jboxes, 2) }
+uf   = { v: i  for i, v in enumerate(jboxes) }
 
-for i, (a,b) in enumerate(sorted(dist, key=lambda x: dist[x])):
+for i, (a,b) in enumerate(sorted(dist, key=lambda x: math.dist(*x))):
     b_id = uf[b]
     for k in uf:
         if uf[k] == b_id: uf[k] = uf[a]
