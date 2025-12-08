@@ -1,23 +1,19 @@
 #!/usr/bin/env python3
 
-import sys, math
+import sys, math, collections as coll
 from itertools import combinations, groupby
 
 jboxes = [ tuple(map(int, s.split(','))) for s in open(sys.argv[1]).readlines() ]
 
-distsq = lambda a,b: (a[0]-b[0])**2 + (a[1]-b[1])**2 + (a[2]-b[2])**2
-dist = { distsq(a,b): sorted((a,b)) for a, b in combinations(jboxes, 2) }
+dist = { tuple(sorted((a,b))): math.dist(a,b) for a, b in combinations(jboxes, 2) }
 uf = { v: i for i, v in enumerate(jboxes) }
 
-cnt = 0
-for k, v in sorted(dist.items()):
-    a, b = v
-    bid = uf[b]
+for i, (a,b) in enumerate(sorted(dist, key=lambda x: dist[x])):
+    b_id = uf[b]
     for k in uf:
-        if uf[k] == bid: uf[k] = uf[a]
-    cnt += 1
-    if cnt == int(sys.argv[2]):
-        print('Part 1:', math.prod( sorted([len(list(k)) for _,k in groupby(sorted(uf.values()))])[-3:] ) )
+        if uf[k] == b_id: uf[k] = uf[a]
+    if i + 1 == int(sys.argv[2]):
+        print('Part 1:', math.prod( c[1] for c in coll.Counter(uf.values()).most_common(3) ))
     if len(set(uf.values())) == 1:
         print(f'Part 2: {a[0]*b[0]}')
         break
